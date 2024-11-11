@@ -21,23 +21,29 @@ body {
   width: 70rem;
   margin: 3rem auto;
 }
-
-.comment {
+.comment_section .comments_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  width: 70rem;
+  margin: 3rem auto 0 auto;
+}
+.comment_section .comments_container .comment {
   background-color: hsl(0, 0%, 100%);
   display: flex;
   align-items: start;
   gap: 2.5rem;
   padding: 2.5rem;
   width: 100%;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
 }
-
-.score {
+.comment_section .comments_container .comment .score {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
+  width: 4rem;
   background-color: hsl(223, 19%, 93%);
   padding: 1.1rem 0.8rem;
   border-radius: 0.7rem;
@@ -46,45 +52,42 @@ body {
   font-weight: 600;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-.score button {
+.comment_section .comments_container .comment .score button {
   border: none;
   cursor: pointer;
 }
-
-.comment_inner {
+.comment_section .comments_container .comment .comment_inner {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
 }
-
-.comment_inner-header {
+.comment_section .comments_container .comment .comment_inner .comment_inner-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
-.comment_inner-details {
+.comment_section .comments_container .comment .comment_inner .comment_inner-header .comment_inner-details {
   display: flex;
   align-items: center;
   gap: 1rem;
   font-size: 1.6rem;
 }
-
-.comment_username {
+.comment_section .comments_container .comment .comment_inner .comment_inner-header .comment_inner-details .comment_username {
   color: black;
   font-weight: 600;
 }
-
-.comment_time {
+.comment_section .comments_container .comment .comment_inner .comment_inner-header .comment_inner-details .comment_time {
   color: hsl(211, 10%, 45%);
 }
-
-img {
-  height: 3.2rem;
+.comment_section .comments_container .comment .comment_inner .comment_inner-header .comment_inner-details .current_user-endicator {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(238, 40%, 52%);
+  font-size: 1.3rem;
+  padding: 0.1rem 0.5rem 0.3rem 0.5rem;
+  border-radius: 0.5rem;
 }
-
-.reply_btn {
+.comment_section .comments_container .comment .comment_inner .comment_inner-header .btn {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -95,9 +98,60 @@ img {
   font-size: 1.6rem;
   font-weight: 600;
 }
-
-.comment_text {
+.comment_section .comments_container .comment .comment_inner .comment_inner-header .btns_container {
+  display: flex;
+  gap: 1.8rem;
+}
+.comment_section .comments_container .comment .comment_inner .comment_inner-header .btns_container .delete {
+  color: hsl(358, 79%, 66%);
+}
+.comment_section .comments_container .comment .comment_inner .comment_text {
   font-size: 1.5rem;
   color: hsl(211, 10%, 45%);
   line-height: 2rem;
+}
+.comment_section .comments_container .comment .comment_inner .comment_text .reply_tag {
+  color: hsl(238, 40%, 52%);
+  font-weight: 600;
+}
+.comment_section .comments_container .comment_replies-container .replies_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1.4rem;
+  border-left: solid 1px hsl(239, 57%, 85%);
+  padding: 0 0 0 4rem;
+  margin-left: 4.2rem;
+}
+.comment_section .add_comment {
+  display: flex;
+  align-items: start;
+  gap: 1.5rem;
+  background-color: hsl(0, 0%, 100%);
+  padding: 2.5rem;
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
+}
+.comment_section .add_comment .input_comment {
+  resize: none;
+  width: 100%;
+  height: 12rem;
+  border: none;
+  border: 1px solid hsl(223, 19%, 93%);
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+}
+.comment_section .add_comment .send_comment-btn {
+  background-color: hsl(238, 40%, 52%);
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  border: none;
+  color: hsl(0, 0%, 100%);
+  font-weight: 500;
+}
+.comment_section img {
+  height: 3.2rem;
 }
