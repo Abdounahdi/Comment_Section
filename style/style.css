@@ -6,6 +6,7 @@
 
 html {
   font-size: 62.5%;
+  transition: all 0.4s;
 }
 
 body {
@@ -97,10 +98,12 @@ body {
   cursor: pointer;
   font-size: 1.6rem;
   font-weight: 600;
+  transition: all 0.3s;
 }
 .comment_section .comments_container .comment .comment_inner .comment_inner-header .btns_container {
   display: flex;
   gap: 1.8rem;
+  transition: all 0.3s;
 }
 .comment_section .comments_container .comment .comment_inner .comment_inner-header .btns_container .delete {
   color: hsl(358, 79%, 66%);
@@ -138,7 +141,7 @@ body {
 .comment_section .add_comment .input_comment {
   resize: none;
   width: 100%;
-  height: 12rem;
+  height: 10rem;
   border: none;
   border: 1px solid hsl(223, 19%, 93%);
   border-radius: 0.5rem;
@@ -151,7 +154,33 @@ body {
   border: none;
   color: hsl(0, 0%, 100%);
   font-weight: 500;
+  cursor: pointer;
 }
 .comment_section img {
   height: 3.2rem;
+}
+
+.plus_score-svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.minus_score-svg {
+  width: 1.1rem;
+  height: 0.3rem;
+}
+
+.reply-svg {
+  width: 1.4rem;
+  height: 1.3rem;
+}
+
+.delete-svg {
+  width: 1.2rem;
+  height: 1.4rem;
+}
+
+.edit-svg {
+  width: 1.4rem;
+  height: 1.4rem;
 }
