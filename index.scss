@@ -182,15 +182,6 @@ body {
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
 
-    .input_comment {
-      resize: none;
-      width: 100%;
-      height: 10rem;
-      border: none;
-      border: 1px solid $neutralLightGray;
-      border-radius: 0.5rem;
-      padding: 1rem 2rem;
-    }
     .send_comment-btn {
       background-color: $primaryBlue;
       border-radius: 0.5rem;
@@ -210,6 +201,19 @@ body {
   img {
     height: 3.5rem;
   }
+}
+
+.input_comment {
+  resize: none;
+  width: 100%;
+  height: 10rem;
+  border: none;
+  border: 1px solid $neutralLightGray;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.4rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  // font-size:1.4rem;
 }
 
 .delete-modal {
@@ -325,26 +329,41 @@ body {
   display: none;
 }
 
+.sumbit_btn {
+  background-color: $primaryBlue;
+  border-radius: 0.5rem;
+  padding: 0.5rem  0.7rem;
+  border: none;
+  color: $white;
+  font-weight: $weightNM;
+  cursor: pointer;
+}
+
 // trying something new
 
 @keyframes shake {
-  10%, 90% {
+  10%,
+  90% {
     transform: translate3d(-1px, 0, 0);
   }
 
-  20%, 80% {
+  20%,
+  80% {
     transform: translate3d(2px, 0, 0);
   }
 
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: translate3d(-4px, 0, 0);
   }
 
-  40%, 60% {
+  40%,
+  60% {
     transform: translate3d(4px, 0, 0);
   }
 }
 
 .apply-shake {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }

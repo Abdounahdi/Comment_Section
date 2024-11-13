@@ -133,7 +133,7 @@ const commentHTMLFiller = function (obj, currentUsername) {
               </svg>
               Delete
             </button>
-            <button class="btn edit">
+            <button class="btn edit_btn">
               <svg class="edit-svg" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z"
@@ -316,7 +316,60 @@ const openDeleteModal = function (e) {
   deleteOverlay.classList.remove("hidden");
   document.body.style.overflow = "hidden";
   commentToDelete = e.target.closest(".comment");
+  removeEvents();
+  updateSite();
 };
+
+const deleteComment = function (commentDelID) {
+  console.log(commentDelID);
+  data.comments = data.comments.filter((comment) => comment.id != commentDelID);
+  data.comments.forEach((comment) => {
+    comment.replies = comment.replies.filter(
+      (reply) => reply.id != commentDelID
+    );
+  });
+};
+
+let updateCheck;
+
+const editFunction = function (e) {
+  updateCheck = true;
+  const updateBtnHTML = `<button class="sumbit_btn">UPDATE</button>`;
+  e.target
+    .closest(".btns_container")
+    .insertAdjacentHTML("beforeend", updateBtnHTML);
+  e.target.closest(".edit_btn").style.display = "none";
+  const commentToEdit = e.target
+    .closest(".comment")
+    .querySelector(".comment_text");
+  const existingCommentText = commentToEdit.textContent;
+  commentToEdit.classList.add("hidden");
+  const textarea = `<textarea
+    name="input"
+    class="input_comment"
+    id=""
+    placeholder="Add a comment..."
+    >${existingCommentText.trim()}</textarea>`;
+  commentToEdit.insertAdjacentHTML("afterend", textarea);
+  removeEvents()
+  updateSite()
+};
+
+
+const updateBtnFunction = (e)=>{
+  const commentDisplay = e.target.closest('.comment').querySelector('.comment_text') ;
+  const replyToUsername = commentDisplay.textContent.trim().slice(0 , commentDisplay.textContent.trim().indexOf(' ')+1);
+  let newComment = (e.target.closest('.comment').querySelector('textarea').value) ;
+  if (checkEmptyText(newComment)){
+    if(newComment[0]==='@')newComment = newComment.slice(newComment.indexOf(' '));
+    commentDisplay.innerHTML = `<span class="reply_tag">${replyToUsername}</span> ${newComment.trim()}` ; 
+    commentDisplay.classList.remove('hidden')
+    e.target.closest('.comment').querySelector('textarea').remove()
+    e.target.closest('.comment').querySelector('.edit_btn').style.display = 'block'
+    e.target.remove()
+  }
+
+}
 
 // DOM manipulation : landing page (this has to be at first so the dom tree can exist)
 // -->UIUpdateAccodringToDataInJsonFile :
@@ -329,6 +382,9 @@ let upVote = document.querySelectorAll(".plus_btn");
 let downVote = document.querySelectorAll(".minus_btn");
 let replyBTNS = document.querySelectorAll(".reply_btn");
 let deleteBTNS = document.querySelectorAll(".delete_btn");
+let editBTNS = document.querySelectorAll(".edit_btn");
+let updateBTNS = document.querySelectorAll(".sumbit_btn");
+
 
 // DOM manipulation :
 
@@ -347,12 +403,23 @@ const updateSite = function () {
   downVote = document.querySelectorAll(".minus_btn");
   replyBTNS = document.querySelectorAll(".reply_btn");
   deleteBTNS = document.querySelectorAll(".delete_btn");
+  editBTNS = document.querySelectorAll(".edit_btn");
+  updateBTNS = document.querySelectorAll(".sumbit_btn");
 
   upVote.forEach((btn) => btn.addEventListener("click", addVote));
 
   downVote.forEach((btn) => btn.addEventListener("click", decreaseVote));
 
   deleteBTNS.forEach((btn) => btn.addEventListener("click", openDeleteModal));
+
+  editBTNS.forEach((editBtn) => {
+    editBtn.addEventListener("click", editFunction);
+  });
+
+    updateBTNS.forEach((updateBtn)=>{
+    updateBtn.addEventListener("click" , updateBtnFunction)
+  })
+
 };
 
 const removeEvents = function () {
@@ -363,6 +430,16 @@ const removeEvents = function () {
   deleteBTNS.forEach((btn) =>
     btn.removeEventListener("click", openDeleteModal)
   );
+
+  
+
+  editBTNS.forEach((editBtn) => {
+    editBtn.removeEventListener("click", editFunction);
+  });
+
+    updateBTNS.forEach((updateBtn)=>{
+    updateBtn.removeEventListener('click' , updateBtnFunction)
+  })
 };
 
 updateSite();
@@ -470,7 +547,7 @@ replyBTNS.forEach((btn) => {
                 </svg>
                 Delete
               </button>
-              <button class="btn edit">
+              <button class="btn edit_btn">
                 <svg class="edit-svg" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z"
@@ -574,7 +651,7 @@ const sendCommentFunction = function () {
               </svg>
               Delete
             </button>
-            <button class="btn edit">
+            <button class="btn edit_btn">
               <svg class="edit-svg" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z"
@@ -620,10 +697,66 @@ deleteBTNS.forEach((deleteBtn) => {
 noBtn.addEventListener("click", closeDeleteModal);
 
 yesBtn.addEventListener("click", function () {
-  commentToDelete.remove();
+  if (commentToDelete.closest(".replies_container") !== null) {
+    // console.log('hedha reply');
+    commentToDelete.remove();
+  } else {
+    commentToDelete.closest(".comments_container").remove();
+  }
+
+  deleteComment(commentToDelete.id);
+
   closeDeleteModal();
 });
 
 //sep//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// -->EditFeature :
+
+// const editFunction = function(e){
+//   const check =e.target.closest('.comment').querySelector('textarea') ;
+//   if (!check){
+//     e.target.closest('.edit_btn').style.filter = 'blur(1px)' ;
+//     const commentToEdit = e.target.closest('.comment').querySelector('.comment_text')
+//     const existingCommentText = (commentToEdit.textContent)
+//     commentToEdit.classList.add("hidden");
+//     const textarea = `<textarea
+//     name="input"
+//     class="input_comment"
+//     id=""
+//     placeholder="Add a comment..."
+//     >${existingCommentText.trim()}</textarea>`
+//     commentToEdit.insertAdjacentHTML('afterend' , textarea)
+//   }
+// }
+
+
+editBTNS.forEach((editBtn) => {
+  editBtn.addEventListener("click", editFunction);
+});
+
+
+  updateBTNS.forEach((updateBtn)=>{
+    updateBtn.addEventListener("click" , updateBtnFunction)
+  })
+
+// document.addEventListener('mouseover' , function(){
+//   console.log('hi');
+//   updateBTNS = document.querySelectorAll(".sumbit_btn");
+  
+
+
+//   updateBTNS.forEach((updateBtn)=>{
+//     updateBtn.removeEventListener('click' , updateBtnFunction)
+//   })
+
+// })
+
 //sep//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// document.addEventListener("keydown", function (e) {
+//   if (e.key == "Enter") {
+//     // data.comments.forEach((comment)=>console.log(comment.replies))
+//     console.log(data);
+//   }
+// });
