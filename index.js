@@ -366,6 +366,10 @@ const updateBtnFunction = (e)=>{
     commentDisplay.classList.remove('hidden')
     e.target.closest('.comment').querySelector('textarea').remove()
     e.target.closest('.comment').querySelector('.edit_btn').style.display = 'block'
+    
+    // --->EditingReplyDATA : 
+    console.log(e.target.closest('.comment').id);
+    
     e.target.remove()
   }
 
@@ -431,8 +435,6 @@ const removeEvents = function () {
     btn.removeEventListener("click", openDeleteModal)
   );
 
-  
-
   editBTNS.forEach((editBtn) => {
     editBtn.removeEventListener("click", editFunction);
   });
@@ -463,7 +465,9 @@ replyBTNS.forEach((btn) => {
           </div>`;
 
       parent.insertAdjacentHTML("beforeend", addReplyHTML);
+      parent.querySelector(".write_reply").scrollIntoView({behavior : 'smooth' , block : 'center'})
     } else {
+      parent.querySelector(".write_reply").scrollIntoView({behavior : 'smooth'})
       check.style.transform = "scale(1.06)";
       check.style.boxShadow = " rgba(0, 0, 0, 0.4) 2.6px 2.6px 2.6px 2.6px";
       setTimeout(popUp, 1000);
