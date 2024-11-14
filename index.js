@@ -1,8 +1,92 @@
 "use strict";
+// DATA :
+// IF you don't want to use local storage use THIS :
 
-import data from "./data.json" with {type: "json"};
+// import data from "./data.json" with {type: "json"};
 
-// Queryselector
+// else : localStorage IS used
+
+localStorage.setItem(
+  "data",
+  localStorage.getItem("data") ||
+    JSON.stringify({
+      currentUser: {
+        image: {
+          png: "./images/avatars/image-juliusomo.png",
+          webp: "./images/avatars/image-juliusomo.webp",
+        },
+        username: "juliusomo",
+      },
+      comments: [
+        {
+          id: 1,
+          content:
+            "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
+          createdAt: "1 month ago",
+          score: 12,
+          user: {
+            image: {
+              png: "./images/avatars/image-amyrobson.png",
+              webp: "./images/avatars/image-amyrobson.webp",
+            },
+            username: "amyrobson",
+          },
+          replies: [],
+        },
+        {
+          id: 2,
+          content:
+            "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
+          createdAt: "2 weeks ago",
+          score: 5,
+          user: {
+            image: {
+              png: "./images/avatars/image-maxblagun.png",
+              webp: "./images/avatars/image-maxblagun.webp",
+            },
+            username: "maxblagun",
+          },
+          replies: [
+            {
+              id: 3,
+              content:
+                "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+              createdAt: "1 week ago",
+              score: 4,
+              replyingTo: "maxblagun",
+              user: {
+                image: {
+                  png: "./images/avatars/image-ramsesmiron.png",
+                  webp: "./images/avatars/image-ramsesmiron.webp",
+                },
+                username: "ramsesmiron",
+              },
+            },
+            {
+              id: 4,
+              content:
+                "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
+              createdAt: "2 days ago",
+              score: 2,
+              replyingTo: "ramsesmiron",
+              user: {
+                image: {
+                  png: "./images/avatars/image-juliusomo.png",
+                  webp: "./images/avatars/image-juliusomo.webp",
+                },
+                username: "juliusomo",
+              },
+            },
+          ],
+        },
+      ],
+    })
+);
+let data = JSON.parse(localStorage.getItem("data"));
+
+///sep///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Queryselector :
 
 const commentsSection = document.querySelector(".comments_container");
 const addCommentTextArea = document.querySelector(".add__comment");
@@ -13,6 +97,7 @@ const noBtn = deleteModal.querySelector(".no_btn");
 const yesBtn = deleteModal.querySelector(".yes_btn");
 
 const currentUser = data.currentUser.username;
+// const currentUser = 'abdou';
 
 // Reausable Functions :
 
@@ -378,6 +463,10 @@ const checkEmptyText = (str) => {
   return true;
 };
 
+// -->EventListnersFunctions :
+
+// -->DeleteFuncitons :
+
 const closeDeleteModal = function () {
   deleteModal.classList.add("hidden");
   deleteOverlay.classList.add("hidden");
@@ -404,7 +493,7 @@ const deleteComment = function (commentDelID) {
   });
 };
 
-// let updateCheck;
+// -->EditFunctions :
 
 const editFunction = function (e) {
   // updateCheck = true;
@@ -460,9 +549,15 @@ const updateBtnFunction = (e) => {
     .slice(0, commentDisplay.textContent.trim().indexOf(" ") + 1);
   let newComment = e.target.closest(".comment").querySelector("textarea").value;
   if (checkEmptyText(newComment)) {
-    if (newComment[0] === "@")
-      newComment = newComment.slice(newComment.indexOf(" "));
-    commentDisplay.innerHTML = `<span class="reply_tag">${replyToUsername}</span> ${newComment.trim()}`;
+    // checking if its is a reply or a comment
+    if (e.target.closest(".replies_container")) {
+      if (newComment[0] === "@")
+        newComment = newComment.slice(newComment.indexOf(" "));
+      commentDisplay.innerHTML = `<span class="reply_tag">${replyToUsername}</span> ${newComment.trim()}`;
+    } else {
+      commentDisplay.innerHTML = ` ${newComment.trim()}`;
+    }
+
     commentDisplay.classList.remove("hidden");
     e.target.closest(".comment").querySelector("textarea").remove();
     e.target.closest(".comment").querySelector(".edit_btn").style.display =
@@ -482,6 +577,8 @@ const updateBtnFunction = (e) => {
     e.target.remove();
   }
 };
+
+// -->ReplyFunction :
 
 const replyBtnFunction = function (e) {
   const parent = e.target.closest(".comment_replies-container");
@@ -640,6 +737,8 @@ let updateBTNS = document.querySelectorAll(".sumbit_btn");
 
 // DOM manipulation :
 
+// -->UpvoteDownvote :
+
 const addVote = function (e) {
   const score = e.target.closest(".comment").querySelector(".score_number");
   score.textContent++;
@@ -699,8 +798,9 @@ const updateSite = function () {
   replyBTNS.forEach((btn) => {
     btn.addEventListener("click", replyBtnFunction);
   });
-};
 
+  localStorage.setItem("data", JSON.stringify(data));
+};
 const removeEvents = function () {
   upVote.forEach((btn) => btn.removeEventListener("click", addVote));
 
@@ -746,8 +846,9 @@ const sendCommentFunction = function () {
       content: commentText,
       createdAt:
         `Today , ` +
-        `${date.getHours()}`.padStart(2, 0) +
-        `:${date.getMinutes()}`.padStart(2, 0),
+        `${date.getHours()}`.padStart(2, "0") +
+        `:` +
+        `${date.getMinutes()}`.padStart(2, "0"),
       score: 0,
       user: data.currentUser,
       replies: [],
@@ -874,77 +975,17 @@ updateBTNS.forEach((updateBtn) => {
 
 //sep//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// document.addEventListener('keydown' , function(e){
-//   if (e.key === 'Enter'){
-
-//     data.comments.sort((a , b )=> b.score - a.score)
-
-// updateUI()
-// updateSite()
-//       }
-// })
-
-// const arrToSortScore = new Array() ;
-// console.log(arrToSortScore);
-
-// const fillWithScores = function(array , obj ){
-//   for (const comment of obj){
-//     array[comment.id-1] = comment.score
-//   }
-// }
-
-// fillWithScores(arrToSortScore , data.comments)
-// console.log(arrToSortScore);
-
-// document.addEventListener('keydown' , function(e){
-//   if (e.key === 'Enter'){
-//     console.log(data);
-//   }
-// })
-
-// console.log(findCommentEdit(3));
+// testing my code :
 
 // document.addEventListener("keydown", function (e) {
 //   if (e.key === "Enter") {
-//     // console.log(data);
-//     console.log("ui updated");
-//     updateUI();
-//     updateSite();
+//     localStorage.setItem("data", JSON.stringify(data));
+//     console.log(data);
+
+//     // console.log("ui updated");
+//     // updateUI();
+//     // updateSite();
 //   }
 // });
 
 //sep//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// const editFunction = function(e){
-//   const check =e.target.closest('.comment').querySelector('textarea') ;
-//   if (!check){
-//     e.target.closest('.edit_btn').style.filter = 'blur(1px)' ;
-//     const commentToEdit = e.target.closest('.comment').querySelector('.comment_text')
-//     const existingCommentText = (commentToEdit.textContent)
-//     commentToEdit.classList.add("hidden");
-//     const textarea = `<textarea
-//     name="input"
-//     class="input_comment"
-//     id=""
-//     placeholder="Add a comment..."
-//     >${existingCommentText.trim()}</textarea>`
-//     commentToEdit.insertAdjacentHTML('afterend' , textarea)
-//   }
-// }
-
-// document.addEventListener('mouseover' , function(){
-//   console.log('hi');
-//   updateBTNS = document.querySelectorAll(".sumbit_btn");
-
-//   updateBTNS.forEach((updateBtn)=>{
-//     updateBtn.removeEventListener('click' , updateBtnFunction)
-//   })
-
-// })
-
-// document.addEventListener("keydown", function (e) {
-//   if (e.key == "Enter") {
-//     // data.comments.forEach((comment)=>console.log(comment.replies))
-//     console.log(data);
-//   }
-// });
