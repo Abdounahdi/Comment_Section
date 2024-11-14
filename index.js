@@ -613,7 +613,12 @@ const replyBtnFunction = function (e) {
         .querySelector(".replies_container")
         .insertAdjacentHTML("beforeend", newReplyHtml);
       document.querySelector(".write_reply").remove();
-      removeEvents();
+      // -->SortingComments
+      data.comments.sort((a, b) => b.score - a.score);
+      data.comments.forEach((reply) => {
+        reply.replies.sort((a, b) => b.score - a.score);
+      });
+      updateUI();
       updateSite();
     }
   });
@@ -642,6 +647,14 @@ const addVote = function (e) {
   // --->DATAchangingScore :
   const commentID = e.target.closest(".comment").id;
   findCommentEdit(commentID).score++;
+
+  // -->SortingComments
+  data.comments.sort((a, b) => b.score - a.score);
+  data.comments.forEach((reply) => {
+    reply.replies.sort((a, b) => b.score - a.score);
+  });
+  updateUI();
+  updateSite();
 };
 const decreaseVote = function (e) {
   const score = e.target.closest(".comment").querySelector(".score_number");
@@ -650,6 +663,14 @@ const decreaseVote = function (e) {
   // --->DATAchangingScore :
   const commentID = e.target.closest(".comment").id;
   findCommentEdit(commentID).score--;
+
+  // -->SortingComments
+  data.comments.sort((a, b) => b.score - a.score);
+  data.comments.forEach((reply) => {
+    reply.replies.sort((a, b) => b.score - a.score);
+  });
+  updateUI();
+  updateSite();
 };
 
 // -->UpdatingEvents :
@@ -853,9 +874,27 @@ updateBTNS.forEach((updateBtn) => {
 
 //sep//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// document.addEventListener('keydown' , function(e){
+//   if (e.key === 'Enter'){
 
+//     data.comments.sort((a , b )=> b.score - a.score)
 
+// updateUI()
+// updateSite()
+//       }
+// })
 
+// const arrToSortScore = new Array() ;
+// console.log(arrToSortScore);
+
+// const fillWithScores = function(array , obj ){
+//   for (const comment of obj){
+//     array[comment.id-1] = comment.score
+//   }
+// }
+
+// fillWithScores(arrToSortScore , data.comments)
+// console.log(arrToSortScore);
 
 // document.addEventListener('keydown' , function(e){
 //   if (e.key === 'Enter'){
@@ -865,14 +904,14 @@ updateBTNS.forEach((updateBtn) => {
 
 // console.log(findCommentEdit(3));
 
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    // console.log(data);
-    console.log("ui updated");
-    updateUI();
-    updateSite();
-  }
-});
+// document.addEventListener("keydown", function (e) {
+//   if (e.key === "Enter") {
+//     // console.log(data);
+//     console.log("ui updated");
+//     updateUI();
+//     updateSite();
+//   }
+// });
 
 //sep//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
