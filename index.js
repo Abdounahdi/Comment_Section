@@ -5,7 +5,7 @@
 // import data from "./data.json" with {type: "json"};
 
 // else : localStorage IS used
-
+// localStorage.clear()
 localStorage.setItem(
   "data",
   localStorage.getItem("data") ||
@@ -463,6 +463,15 @@ const checkEmptyText = (str) => {
   return true;
 };
 
+const sortingCommentsFunction = function(){
+  data.comments.sort((a, b) => b.score - a.score);
+  data.comments.forEach((reply) => {
+    reply.replies.sort((a, b) => b.score - a.score);
+  });
+  updateUI();
+  updateSite();
+}
+
 // -->EventListnersFunctions :
 
 // -->DeleteFuncitons :
@@ -711,12 +720,7 @@ const replyBtnFunction = function (e) {
         .insertAdjacentHTML("beforeend", newReplyHtml);
       document.querySelector(".write_reply").remove();
       // -->SortingComments
-      data.comments.sort((a, b) => b.score - a.score);
-      data.comments.forEach((reply) => {
-        reply.replies.sort((a, b) => b.score - a.score);
-      });
-      updateUI();
-      updateSite();
+      sortingCommentsFunction()
     }
   });
 };
@@ -748,12 +752,7 @@ const addVote = function (e) {
   findCommentEdit(commentID).score++;
 
   // -->SortingComments
-  data.comments.sort((a, b) => b.score - a.score);
-  data.comments.forEach((reply) => {
-    reply.replies.sort((a, b) => b.score - a.score);
-  });
-  updateUI();
-  updateSite();
+  sortingCommentsFunction()
 };
 const decreaseVote = function (e) {
   const score = e.target.closest(".comment").querySelector(".score_number");
@@ -764,12 +763,7 @@ const decreaseVote = function (e) {
   findCommentEdit(commentID).score--;
 
   // -->SortingComments
-  data.comments.sort((a, b) => b.score - a.score);
-  data.comments.forEach((reply) => {
-    reply.replies.sort((a, b) => b.score - a.score);
-  });
-  updateUI();
-  updateSite();
+  sortingCommentsFunction()
 };
 
 // -->UpdatingEvents :
@@ -936,6 +930,9 @@ const sendCommentFunction = function () {
   parent.addEventListener("animationend", (e) => {
     parent.classList.remove("apply-shake");
   });
+
+  // -->SortingComments
+  sortingCommentsFunction()
 };
 
 sendBtn.addEventListener("click", sendCommentFunction);
