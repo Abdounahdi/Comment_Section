@@ -1,5 +1,42 @@
-//VARIBALES :
+@use "sass:math";
 
+//RESPOSIVNESS :
+
+$breakpoints: (
+  "tablette": 760px,
+  "tablette_sm": 650px,
+  "tablette_SM": 510px,
+  "mobile_L": 450px,
+  "mobile": 375px,
+);
+
+@mixin tablette {
+  @media (max-width: map-get($breakpoints, "tablette")) {
+    @content;
+  }
+}
+@mixin tablette_sm {
+  @media (max-width: map-get($breakpoints, "tablette_sm")) {
+    @content;
+  }
+}
+@mixin tablette_SM {
+  @media (max-width: map-get($breakpoints, "tablette_SM")) {
+    @content;
+  }
+}
+@mixin mobile_L {
+  @media (max-width: map-get($breakpoints, "mobile_L")) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media (max-width: map-get($breakpoints, "mobile")) {
+    @content;
+  }
+}
+
+//VARIBALES :
 // COLORS
 $primaryBlue: hsl(238, 40%, 52%);
 $primaryRed: hsl(358, 79%, 66%);
@@ -42,12 +79,18 @@ body {
   gap: 1.6rem;
   width: 70rem;
   margin: 6rem auto;
+  @include tablette {
+    width: 90%;
+  }
 
   .comments_container {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
     width: 70rem;
+    @include tablette {
+      width: 100%;
+    }
 
     .comment {
       background-color: $white;
@@ -60,6 +103,11 @@ body {
       border-radius: 1rem;
       box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
       // justify-content: center;
+
+      @include tablette_sm {
+        padding-bottom: 7rem;
+        position: relative;
+      }
 
       .score {
         display: flex;
@@ -77,6 +125,20 @@ body {
         button {
           border: none;
           cursor: pointer;
+        }
+
+        @include tablette_sm {
+          position: absolute;
+          flex-direction: row;
+          width: auto;
+          align-items: center;
+          bottom: 1.8rem;
+          // left: 0;
+
+          .minus_btn {
+            display: flex;
+            align-items: center;
+          }
         }
       }
 
@@ -104,6 +166,9 @@ body {
 
             .comment_time {
               color: $neutralGrayishBlue;
+              @include tablette {
+                font-size: 1.4rem;
+              }
             }
 
             .current_user-endicator {
@@ -127,6 +192,13 @@ body {
             font-weight: $weightBO;
             transition: all 0.3s;
           }
+          .reply_btn {
+            @include tablette_sm {
+              position: absolute;
+              bottom: 3rem;
+              right: 2.2rem;
+            }
+          }
 
           .btns_container {
             display: flex;
@@ -134,6 +206,12 @@ body {
             transition: all 0.3s;
             .delete_btn {
               color: $primaryRed;
+            }
+
+            @include tablette_sm {
+              position: absolute;
+              bottom: 3rem;
+              right: 2rem;
             }
           }
         }
@@ -167,6 +245,10 @@ body {
         border-left: solid 1px $primaryGrayishBlue;
         padding: 0 0 0 4rem;
         margin-left: 4.2rem;
+        @include tablette {
+          margin-left: 1.2rem;
+          padding-left: 1.5rem;
+        }
       }
     }
   }
@@ -182,6 +264,11 @@ body {
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
 
+    @include tablette_sm {
+      position: relative;
+      padding-bottom: 7rem;
+    }
+
     .send_comment-btn {
       background-color: $primaryBlue;
       border-radius: 0.5rem;
@@ -190,6 +277,18 @@ body {
       color: $white;
       font-weight: $weightNM;
       cursor: pointer;
+      @include tablette_sm {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+      }
+    }
+
+    img {
+      @include tablette_sm {
+        position: absolute;
+        bottom: 2rem;
+      }
     }
   }
 
@@ -216,72 +315,90 @@ body {
   // font-size:1.4rem;
 }
 
-.delete-modal {
+.delete_modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   z-index: 9999;
   position: sticky;
   bottom: 50%;
   left: 50%;
-  transform: translate(-50%, 50%);
-  padding: 2.4rem;
-  background-color: $white;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  border-radius: 1rem;
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
-  width: 40rem;
-  font-size: $fontSizeParagraph;
-  color: $neutralGrayishBlue;
+  transform: translate(0%, 50%);
 
-  .delete-modal--inner {
+  .delete-modal {
+    position: absolute;
+
+    padding: 2.4rem;
+    background-color: $white;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    border-radius: 1rem;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
+    width: 40rem;
+    font-size: $fontSizeParagraph;
+    color: $neutralGrayishBlue;
 
-    .delete_modal-heading {
-      font-size: 2.4rem;
-      font-weight: $weightBO;
-      color: $neutralDarkBlue;
+    @include mobile_L {
+      width: 30rem;
     }
-  }
 
-  .delete_btns-container {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    width: 100%;
-    .no_btn {
-      transition: all 0.4s;
-      background-color: $neutralGrayishBlue;
-      color: $white;
-      padding: 1.5rem 2.5rem;
-      border-radius: 1rem;
-      border: none;
-      font-weight: $weightBO;
+    .delete-modal--inner {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      .delete_modal-heading {
+        font-size: 2.4rem;
+        font-weight: $weightBO;
+        color: $neutralDarkBlue;
+      }
+    }
+
+    .delete_btns-container {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
       width: 100%;
-      cursor: pointer;
-    }
 
-    .no_btn:hover,
-    .no_btn:active {
-      box-shadow: hwb(211 40% 51% / 0.287) 3px 3px 3px;
-      transform: scale(1.05);
-    }
-    .yes_btn {
-      background-color: $primaryRed;
-      color: $white;
-      padding: 1.5rem 2.5rem;
-      border-radius: 1rem;
-      border: none;
-      font-weight: $weightBO;
-      width: 100%;
-      transition: all 0.4s;
-      cursor: pointer;
-    }
-    .yes_btn:hover,
-    .yes_btn:active {
-      box-shadow: hsla(358, 79%, 66%, 0.536) 3px 3px 3px;
-      transform: scale(1.05);
+      @include mobile_L {
+        flex-direction: column;
+      }
+
+      .no_btn {
+        transition: all 0.4s;
+        background-color: $neutralGrayishBlue;
+        color: $white;
+        padding: 1.5rem 2.5rem;
+        border-radius: 1rem;
+        border: none;
+        font-weight: $weightBO;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .no_btn:hover,
+      .no_btn:active {
+        box-shadow: hwb(211 40% 51% / 0.287) 3px 3px 3px;
+        transform: scale(1.05);
+      }
+      .yes_btn {
+        background-color: $primaryRed;
+        color: $white;
+        padding: 1.5rem 2.5rem;
+        border-radius: 1rem;
+        border: none;
+        font-weight: $weightBO;
+        width: 100%;
+        transition: all 0.4s;
+        cursor: pointer;
+      }
+      .yes_btn:hover,
+      .yes_btn:active {
+        box-shadow: hsla(358, 79%, 66%, 0.536) 3px 3px 3px;
+        transform: scale(1.05);
+      }
     }
   }
 }

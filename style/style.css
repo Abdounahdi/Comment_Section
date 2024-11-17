@@ -22,11 +22,21 @@ body {
   width: 70rem;
   margin: 6rem auto;
 }
+@media (max-width: 760px) {
+  .comment_section {
+    width: 90%;
+  }
+}
 .comment_section .comments_container {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
   width: 70rem;
+}
+@media (max-width: 760px) {
+  .comment_section .comments_container {
+    width: 100%;
+  }
 }
 .comment_section .comments_container .comment {
   background-color: hsl(0, 0%, 100%);
@@ -37,6 +47,12 @@ body {
   width: 100%;
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
+}
+@media (max-width: 650px) {
+  .comment_section .comments_container .comment {
+    padding-bottom: 7rem;
+    position: relative;
+  }
 }
 .comment_section .comments_container .comment .score {
   display: flex;
@@ -55,6 +71,19 @@ body {
 .comment_section .comments_container .comment .score button {
   border: none;
   cursor: pointer;
+}
+@media (max-width: 650px) {
+  .comment_section .comments_container .comment .score {
+    position: absolute;
+    flex-direction: row;
+    width: auto;
+    align-items: center;
+    bottom: 1.8rem;
+  }
+  .comment_section .comments_container .comment .score .minus_btn {
+    display: flex;
+    align-items: center;
+  }
 }
 .comment_section .comments_container .comment .comment_inner {
   display: flex;
@@ -80,6 +109,11 @@ body {
 .comment_section .comments_container .comment .comment_inner .comment_inner-header .comment_inner-details .comment_time {
   color: hsl(211, 10%, 45%);
 }
+@media (max-width: 760px) {
+  .comment_section .comments_container .comment .comment_inner .comment_inner-header .comment_inner-details .comment_time {
+    font-size: 1.4rem;
+  }
+}
 .comment_section .comments_container .comment .comment_inner .comment_inner-header .comment_inner-details .current_user-endicator {
   color: hsl(0, 0%, 100%);
   background-color: hsl(238, 40%, 52%);
@@ -99,6 +133,13 @@ body {
   font-weight: 600;
   transition: all 0.3s;
 }
+@media (max-width: 650px) {
+  .comment_section .comments_container .comment .comment_inner .comment_inner-header .reply_btn {
+    position: absolute;
+    bottom: 3rem;
+    right: 2.2rem;
+  }
+}
 .comment_section .comments_container .comment .comment_inner .comment_inner-header .btns_container {
   display: flex;
   gap: 1.8rem;
@@ -106,6 +147,13 @@ body {
 }
 .comment_section .comments_container .comment .comment_inner .comment_inner-header .btns_container .delete_btn {
   color: hsl(358, 79%, 66%);
+}
+@media (max-width: 650px) {
+  .comment_section .comments_container .comment .comment_inner .comment_inner-header .btns_container {
+    position: absolute;
+    bottom: 3rem;
+    right: 2rem;
+  }
 }
 .comment_section .comments_container .comment .comment_inner .comment_text {
   font-size: 1.5rem;
@@ -131,6 +179,12 @@ body {
   padding: 0 0 0 4rem;
   margin-left: 4.2rem;
 }
+@media (max-width: 760px) {
+  .comment_section .comments_container .comment_replies-container .replies_container {
+    margin-left: 1.2rem;
+    padding-left: 1.5rem;
+  }
+}
 .comment_section .add_comment {
   display: flex;
   align-items: start;
@@ -141,6 +195,12 @@ body {
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
 }
+@media (max-width: 650px) {
+  .comment_section .add_comment {
+    position: relative;
+    padding-bottom: 7rem;
+  }
+}
 .comment_section .add_comment .send_comment-btn {
   background-color: hsl(238, 40%, 52%);
   border-radius: 0.5rem;
@@ -149,6 +209,19 @@ body {
   color: hsl(0, 0%, 100%);
   font-weight: 500;
   cursor: pointer;
+}
+@media (max-width: 650px) {
+  .comment_section .add_comment .send_comment-btn {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+  }
+}
+@media (max-width: 650px) {
+  .comment_section .add_comment img {
+    position: absolute;
+    bottom: 2rem;
+  }
 }
 .comment_section .write_reply {
   transform: scale(1.01);
@@ -170,12 +243,18 @@ body {
   font-family: inherit;
 }
 
-.delete-modal {
+.delete_modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 9999;
   position: sticky;
   bottom: 50%;
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(0%, 50%);
+}
+.delete_modal-container .delete-modal {
+  position: absolute;
   padding: 2.4rem;
   background-color: hsl(0, 0%, 100%);
   display: flex;
@@ -187,23 +266,33 @@ body {
   font-size: 16px;
   color: hsl(211, 10%, 45%);
 }
-.delete-modal .delete-modal--inner {
+@media (max-width: 450px) {
+  .delete_modal-container .delete-modal {
+    width: 30rem;
+  }
+}
+.delete_modal-container .delete-modal .delete-modal--inner {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-.delete-modal .delete-modal--inner .delete_modal-heading {
+.delete_modal-container .delete-modal .delete-modal--inner .delete_modal-heading {
   font-size: 2.4rem;
   font-weight: 600;
   color: hsl(212, 24%, 26%);
 }
-.delete-modal .delete_btns-container {
+.delete_modal-container .delete-modal .delete_btns-container {
   display: flex;
   gap: 1rem;
   align-items: center;
   width: 100%;
 }
-.delete-modal .delete_btns-container .no_btn {
+@media (max-width: 450px) {
+  .delete_modal-container .delete-modal .delete_btns-container {
+    flex-direction: column;
+  }
+}
+.delete_modal-container .delete-modal .delete_btns-container .no_btn {
   transition: all 0.4s;
   background-color: hsl(211, 10%, 45%);
   color: hsl(0, 0%, 100%);
@@ -214,12 +303,12 @@ body {
   width: 100%;
   cursor: pointer;
 }
-.delete-modal .delete_btns-container .no_btn:hover,
-.delete-modal .delete_btns-container .no_btn:active {
+.delete_modal-container .delete-modal .delete_btns-container .no_btn:hover,
+.delete_modal-container .delete-modal .delete_btns-container .no_btn:active {
   box-shadow: hsla(211, 10.1123595506%, 44.5%, 0.287) 3px 3px 3px;
   transform: scale(1.05);
 }
-.delete-modal .delete_btns-container .yes_btn {
+.delete_modal-container .delete-modal .delete_btns-container .yes_btn {
   background-color: hsl(358, 79%, 66%);
   color: hsl(0, 0%, 100%);
   padding: 1.5rem 2.5rem;
@@ -230,8 +319,8 @@ body {
   transition: all 0.4s;
   cursor: pointer;
 }
-.delete-modal .delete_btns-container .yes_btn:hover,
-.delete-modal .delete_btns-container .yes_btn:active {
+.delete_modal-container .delete-modal .delete_btns-container .yes_btn:hover,
+.delete_modal-container .delete-modal .delete_btns-container .yes_btn:active {
   box-shadow: hsla(358, 79%, 66%, 0.536) 3px 3px 3px;
   transform: scale(1.05);
 }
