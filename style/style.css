@@ -43,10 +43,12 @@ body {
   display: flex;
   align-items: start;
   gap: 2.5rem;
+  overflow: hidden;
   padding: 2.5rem;
   width: 100%;
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
+  transition: all 0.6s;
 }
 @media (max-width: 650px) {
   .comment_section .comments_container .comment {
@@ -90,6 +92,7 @@ body {
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+  position: relative;
 }
 .comment_section .comments_container .comment .comment_inner .comment_inner-header {
   display: flex;
@@ -224,8 +227,9 @@ body {
   }
 }
 .comment_section .write_reply {
-  transform: scale(1.01);
-  transition: all 0.3s;
+  transition: all 0.5s;
+  transform: translate(0, -4rem);
+  opacity: 0;
 }
 .comment_section img {
   height: 3.5rem;
@@ -373,6 +377,14 @@ body {
   color: hsl(0, 0%, 100%);
   font-weight: 500;
   cursor: pointer;
+}
+
+textarea::placeholder {
+  font-style: italic;
+}
+
+.reply {
+  transition: all 0.9s;
 }
 
 @keyframes shake {

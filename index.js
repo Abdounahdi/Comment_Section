@@ -2,87 +2,87 @@
 // DATA :
 // IF you don't want to use local storage use THIS :
 
-import data from "./data.json" with {type: "json"};
+// import data from "./data.json" with {type: "json"};
 
 // else : localStorage IS used
 // localStorage.clear()
-// localStorage.setItem(
-//   "data",
-//   localStorage.getItem("data") ||
-//     JSON.stringify({
-//       currentUser: {
-//         image: {
-//           png: "./images/avatars/image-juliusomo.png",
-//           webp: "./images/avatars/image-juliusomo.webp",
-//         },
-//         username: "juliusomo",
-//       },
-//       comments: [
-//         {
-//           id: 1,
-//           content:
-//             "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
-//           createdAt: "1 month ago",
-//           score: 12,
-//           user: {
-//             image: {
-//               png: "./images/avatars/image-amyrobson.png",
-//               webp: "./images/avatars/image-amyrobson.webp",
-//             },
-//             username: "amyrobson",
-//           },
-//           replies: [],
-//         },
-//         {
-//           id: 2,
-//           content:
-//             "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
-//           createdAt: "2 weeks ago",
-//           score: 5,
-//           user: {
-//             image: {
-//               png: "./images/avatars/image-maxblagun.png",
-//               webp: "./images/avatars/image-maxblagun.webp",
-//             },
-//             username: "maxblagun",
-//           },
-//           replies: [
-//             {
-//               id: 3,
-//               content:
-//                 "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
-//               createdAt: "1 week ago",
-//               score: 4,
-//               replyingTo: "maxblagun",
-//               user: {
-//                 image: {
-//                   png: "./images/avatars/image-ramsesmiron.png",
-//                   webp: "./images/avatars/image-ramsesmiron.webp",
-//                 },
-//                 username: "ramsesmiron",
-//               },
-//             },
-//             {
-//               id: 4,
-//               content:
-//                 "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
-//               createdAt: "2 days ago",
-//               score: 2,
-//               replyingTo: "ramsesmiron",
-//               user: {
-//                 image: {
-//                   png: "./images/avatars/image-juliusomo.png",
-//                   webp: "./images/avatars/image-juliusomo.webp",
-//                 },
-//                 username: "juliusomo",
-//               },
-//             },
-//           ],
-//         },
-//       ],
-//     })
-// );
-// let data = JSON.parse(localStorage.getItem("data"));
+localStorage.setItem(
+  "data",
+  localStorage.getItem("data") ||
+    JSON.stringify({
+      currentUser: {
+        image: {
+          png: "./images/avatars/image-juliusomo.png",
+          webp: "./images/avatars/image-juliusomo.webp",
+        },
+        username: "juliusomo",
+      },
+      comments: [
+        {
+          id: 1,
+          content:
+            "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
+          createdAt: "1 month ago",
+          score: 12,
+          user: {
+            image: {
+              png: "./images/avatars/image-amyrobson.png",
+              webp: "./images/avatars/image-amyrobson.webp",
+            },
+            username: "amyrobson",
+          },
+          replies: [],
+        },
+        {
+          id: 2,
+          content:
+            "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
+          createdAt: "2 weeks ago",
+          score: 5,
+          user: {
+            image: {
+              png: "./images/avatars/image-maxblagun.png",
+              webp: "./images/avatars/image-maxblagun.webp",
+            },
+            username: "maxblagun",
+          },
+          replies: [
+            {
+              id: 3,
+              content:
+                "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+              createdAt: "1 week ago",
+              score: 4,
+              replyingTo: "maxblagun",
+              user: {
+                image: {
+                  png: "./images/avatars/image-ramsesmiron.png",
+                  webp: "./images/avatars/image-ramsesmiron.webp",
+                },
+                username: "ramsesmiron",
+              },
+            },
+            {
+              id: 4,
+              content:
+                "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
+              createdAt: "2 days ago",
+              score: 2,
+              replyingTo: "ramsesmiron",
+              user: {
+                image: {
+                  png: "./images/avatars/image-juliusomo.png",
+                  webp: "./images/avatars/image-juliusomo.webp",
+                },
+                username: "juliusomo",
+              },
+            },
+          ],
+        },
+      ],
+    })
+);
+let data = JSON.parse(localStorage.getItem("data"));
 
 ///sep///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -421,6 +421,10 @@ const commentHTMLFiller = function (obj, currentUsername) {
         ${obj.content}
       </p>
 
+
+
+      </button>
+
     </div>
   </div>
   <div class="replies_container">
@@ -472,6 +476,14 @@ const sortingCommentsFunction = function(){
   updateSite();
 }
 
+const animationUP = function(maxId){
+  document.getElementById(maxId).style.opacity = '0' ;
+  document.getElementById(maxId).style.transform =  "translate(0 , 4rem)";
+  setTimeout(function(){
+    document.getElementById(maxId).style.opacity = '1' ;
+    document.getElementById(maxId).style.transform =  "translate(0 , 0)";
+  }, 50);
+}
 // -->EventListnersFunctions :
 
 // -->DeleteFuncitons :
@@ -599,14 +611,17 @@ const replyBtnFunction = function (e) {
     }
     const addReplyHTML = `<div class="add_comment input write_reply">
           <img src="images/avatars/image-juliusomo.png" alt="profile pic">
-          <textarea name="input" class="input_comment write_reply-text" id="" placeholder="Add a comment..."></textarea>
+          <textarea name="input" class="input_comment write_reply-text" id="" placeholder="Reply to ${parent.querySelector('.comment_username').textContent}..."></textarea>
           <button class="send_comment-btn reply_comment-btn">REPLY</button>
         </div>`;
 
     parent.insertAdjacentHTML("beforeend", addReplyHTML);
-    parent
-      .querySelector(".write_reply")
+    const placeToWrite = parent
+    .querySelector(".write_reply") ;
+    placeToWrite
       .scrollIntoView({ behavior: "smooth", block: "center" });
+    placeToWrite.style.transform = 'scale(1.01)'
+    placeToWrite.style.opacity = '1'
   } else {
     parent
       .querySelector(".write_reply")
@@ -724,6 +739,7 @@ const replyBtnFunction = function (e) {
     }
   });
 };
+
 
 // DOM manipulation : landing page (this has to be at first so the dom tree can exist)
 // -->UIUpdateAccodringToDataInJsonFile :
@@ -920,6 +936,7 @@ const sendCommentFunction = function () {
   </div><div class="replies_container"></div></div>
   `;
     commentsSection.insertAdjacentHTML("beforeend", newCommentHtml);
+    animationUP(maxId);
     parent.querySelector("textarea").value = "";
     removeEvents();
     updateSite();
@@ -932,7 +949,9 @@ const sendCommentFunction = function () {
   });
 
   // -->SortingComments
-  sortingCommentsFunction()
+  setTimeout(() => {
+    sortingCommentsFunction()
+  }, 500);
 };
 
 sendBtn.addEventListener("click", sendCommentFunction);
@@ -970,7 +989,7 @@ updateBTNS.forEach((updateBtn) => {
   updateBtn.addEventListener("click", updateBtnFunction);
 });
 
-//sep//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//sep/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // testing my code :
 
