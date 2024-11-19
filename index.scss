@@ -152,7 +152,6 @@ body {
         width: 100%;
         position: relative;
 
-
         .comment_inner-header {
           display: flex;
           justify-content: space-between;
@@ -200,8 +199,8 @@ body {
           .reply_btn {
             @include tablette_sm {
               position: absolute;
-              bottom: 3rem;
-              right: 2.2rem;
+              bottom: -4rem;
+              right: -0.5rem;
             }
           }
 
@@ -215,8 +214,8 @@ body {
 
             @include tablette_sm {
               position: absolute;
-              bottom: 3rem;
-              right: 2rem;
+              bottom: -4.2rem;
+              right: -0.4rem;
             }
           }
         }
@@ -299,7 +298,7 @@ body {
 
   .write_reply {
     transition: all 0.5s;
-    transform: translate(0 , -4rem);
+    transform: translate(0, -4rem);
     opacity: 0;
     // transform: scale(1.01);
   }
@@ -463,16 +462,15 @@ body {
   cursor: pointer;
 }
 
-//styling placeHolder of textAreas 
+//styling placeHolder of textAreas
 
-textarea::placeholder{
+textarea::placeholder {
   font-style: italic;
 }
 
-
 //ANImation to a reply added
 
-.reply{
+.reply {
   transition: all 0.9s;
 }
 
@@ -505,14 +503,13 @@ textarea::placeholder{
   animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-
 // .hide_replies-btn{
 //   background: none;
 //   border: none;
 //   background-color: $lightestGray;
 //   border-radius: 48%;
 //   cursor: pointer;
-  
+
 //   position: absolute;
 //   bottom: -30%;
 //   right: -5%;
@@ -523,7 +520,7 @@ textarea::placeholder{
 //   padding: 0.8rem;
 
 //   transition: all 0.4s ease-in-out;
-  
+
 //   .hide_replies-eyeOpen{
 //     height: 3rem;
 //     stroke-width: 0.2rem;

@@ -139,8 +139,8 @@ body {
 @media (max-width: 650px) {
   .comment_section .comments_container .comment .comment_inner .comment_inner-header .reply_btn {
     position: absolute;
-    bottom: 3rem;
-    right: 2.2rem;
+    bottom: -4rem;
+    right: -0.5rem;
   }
 }
 .comment_section .comments_container .comment .comment_inner .comment_inner-header .btns_container {
@@ -154,8 +154,8 @@ body {
 @media (max-width: 650px) {
   .comment_section .comments_container .comment .comment_inner .comment_inner-header .btns_container {
     position: absolute;
-    bottom: 3rem;
-    right: 2rem;
+    bottom: -4.2rem;
+    right: -0.4rem;
   }
 }
 .comment_section .comments_container .comment .comment_inner .comment_text {
