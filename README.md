@@ -6,14 +6,6 @@
 
 **Link to solution : https://abdounahdi.github.io/Comment_Section/** 
 
-## Table of contents
-
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Links](#links)
-- [Built with](#built-with)
-- [Author](#author)
-
 ## Overview
 
 ### The challenge
