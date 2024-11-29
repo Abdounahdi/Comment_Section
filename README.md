@@ -1,6 +1,6 @@
 # Frontend Mentor - Interactive comments section solution
 
-![](desing/desktop-design.jpg)
+![](./desing/desktop-design.jpg)
 
 
 
