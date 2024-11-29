@@ -1,6 +1,6 @@
 # Frontend Mentor - Interactive comments section solution
 
-![](./desing/desktop-design.jpg)
+![screenshot-2024-11-29-10-02-54](https://github.com/user-attachments/assets/349fd5cf-f7c1-47fe-b030-5daa8cc8d09e)
 
 
 
